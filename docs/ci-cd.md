@@ -4,7 +4,7 @@
 
 The repository currently contains product and architecture documentation. The `CI` workflow runs on pushes to all branches, pull requests targeting `main`, and manual dispatch. It uses a GitHub-hosted Ubuntu runner; the owner's computer is not a CI runner.
 
-The `Documentation` job uses the standard `markdownlint-cli2` action to check Markdown formatting in the root README and under `docs/`. Rules cover headings, lists, code fences, spacing and other Markdown conventions. The small repository configuration allows long prose and HTML line breaks in tables. Link-target existence and Mermaid rendering are not checked by this workflow.
+The `Documentation` job uses the standard `markdownlint-cli2` action to check Markdown formatting in the root README, under `docs/`, and in `.github` Markdown templates. Rules cover headings, lists, code fences, spacing and other Markdown conventions. The small repository configuration allows long prose and HTML line breaks in tables. Link-target existence and Mermaid rendering are not checked by this workflow.
 
 There is no custom documentation checker or test suite to maintain. Workflow action dependencies are pinned to full commit hashes. Dependabot proposes weekly action updates; those updates still require review. Token permissions are read-only and checkout does not persist credentials. Superseded runs on the same branch or pull request are cancelled.
 
@@ -13,7 +13,7 @@ There is no custom documentation checker or test suite to maintain. Workflow act
 Use a Node.js version supported by the linter, then run the same linter version bundled with the pinned action:
 
 ```text
-npx --yes markdownlint-cli2@0.23.1 "README.md" "docs/**/*.md"
+npx --yes markdownlint-cli2@0.23.1 "README.md" "docs/**/*.md" ".github/*.md"
 ```
 
 These commands run from the repository root. A nonzero exit status means the check failed. GitHub execution is verified only after the workflow has been committed, pushed and run in the repository Actions tab.

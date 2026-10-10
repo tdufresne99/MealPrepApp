@@ -7,6 +7,8 @@
 | [Specifications](phase-1/specifications.md) | Product scope, requirements, domain vocabulary and use cases |
 | [Architecture](phase-1/architecture.md) | Hexagonal module boundaries, entities and tables, communication contracts, runtime and deployment views, architectural decisions |
 | [Prototype plan](phase-1/prototype-plan.md) | Bounded prototype scope, development milestones, decision gates and acceptance checklist |
+| [Prototype user stories](phase-1/prototype-user-stories.md) | Ordered story backlog, branch names, prerequisites and pull request acceptance criteria |
+| [GitHub issues](phase-1/github-issues.md) | Created issue links and GitHub Project setup |
 
 ## Documentation conventions
 

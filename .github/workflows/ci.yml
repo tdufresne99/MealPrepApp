@@ -17,6 +17,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  backend:
+    name: Backend build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+        with:
+          global-json-file: global.json
+
+      - name: Restore backend
+        run: dotnet restore MealPrepApp.slnx
+
+      - name: Build backend
+        run: dotnet build MealPrepApp.slnx --configuration Release --no-restore
+
   documentation:
     name: Documentation
     runs-on: ubuntu-24.04

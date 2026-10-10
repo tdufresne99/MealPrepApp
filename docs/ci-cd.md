@@ -2,7 +2,9 @@
 
 ## Current implementation
 
-The repository currently contains product and architecture documentation. The `CI` workflow runs on pushes to all branches, pull requests targeting `main`, and manual dispatch. It uses a GitHub-hosted Ubuntu runner; the owner's computer is not a CI runner.
+The repository contains documentation and the minimal API host introduced by US-01. The `CI` workflow runs on pushes to all branches, pull requests targeting `main`, and manual dispatch. It uses a GitHub-hosted Ubuntu runner; the owner's computer is not a CI runner.
+
+The `Backend build` job installs the SDK pinned by `global.json`, restores `MealPrepApp.slnx` and builds it in Release configuration. No application test suite exists yet; this job validates compilation only. See the [backend startup instructions](../README.md#run-the-backend) to check the health endpoint locally.
 
 The `Documentation` job uses the standard `markdownlint-cli2` action to check Markdown formatting in the root README and under `docs/`. Rules cover headings, lists, code fences, spacing and other Markdown conventions. The small repository configuration allows long prose and HTML line breaks in tables. Link-target existence and Mermaid rendering are not checked by this workflow.
 
@@ -20,11 +22,11 @@ These commands run from the repository root. A nonzero exit status means the che
 
 ## Main branch protection
 
-After the first successful GitHub run, the owner can configure a branch rule for `main` requiring the `Documentation` status check before merging a pull request. The workflow itself does not configure repository settings or prevent direct pushes. Rules depend on repository settings and the available GitHub plan.
+After the first successful GitHub run, the owner can configure a branch rule for `main` requiring the `Documentation` and `Backend build` status checks before merging a pull request. The workflow itself does not configure repository settings or prevent direct pushes. Rules depend on repository settings and the available GitHub plan.
 
 ## Add application checks when scaffolding exists
 
-1. Backend: restore dependencies, build .NET projects and run domain/application/architecture tests.
+1. Backend: add domain/application/architecture tests alongside the modules they validate.
 2. Database integration: start a disposable PostgreSQL service and validate mappings, migrations, ownership, concurrency and idempotency.
 3. Client: install locked dependencies, check translations, build Angular and run relevant tests.
 4. Packaging: build the portable API image after checks pass; publish immutable versions only from trusted release paths.

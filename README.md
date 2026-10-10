@@ -15,6 +15,7 @@ Start with the [documentation index](docs/README.md).
 - [Specifications](docs/phase-1/specifications.md): product requirements and open decisions.
 - [Architecture](docs/phase-1/architecture.md): module boundaries, entities, owned tables, ports, deployment and ADRs.
 - [Prototype plan](docs/phase-1/prototype-plan.md): milestones, dependencies, acceptance criteria and user decision gates.
+- [Prototype user stories](docs/phase-1/prototype-user-stories.md): one-story branches and pull request sequence.
 
 ## Confirmed direction
 

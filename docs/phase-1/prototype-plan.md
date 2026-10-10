@@ -72,6 +72,8 @@ These defaults make the first implementation bounded. Items still open are expli
 
 ## Development milestones
 
+Use the [user story backlog](prototype-user-stories.md) for one-story branches and pull requests. It decomposes the milestones below into independently reviewable changes with acceptance criteria and decision gates.
+
 | Stage | Depends on | Demonstrable output | Completion condition |
 | --- | --- | --- | --- |
 | M0 Scope and decision baseline | None | Prototype scenarios and decision register | Identify decisions needed for the next stage; do not require every future feature to be settled |

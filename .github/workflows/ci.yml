@@ -33,3 +33,4 @@ jobs:
           globs: |
             README.md
             docs/**/*.md
+            .github/*.md

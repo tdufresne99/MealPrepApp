@@ -12,6 +12,8 @@
 
 ## Documentation conventions
 
+The [implemented backend module boundaries](module-boundaries.md) describe the current assembly structure, dependency checks and their limits.
+
 See [Continuous integration and delivery](ci-cd.md) for the current checks and future deployment gates.
 
 Markdown files in this repository are the maintained documentation baseline. Keep documentation and code in English; French is used only for application translations or relevant user-content examples.

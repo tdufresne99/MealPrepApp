@@ -1,3 +1,19 @@
 <Solution>
   <Project Path="src/MealPrep.Api/MealPrep.Api.csproj" />
+  <Project Path="src/Modules/Identity/MealPrep.Identity.Domain/MealPrep.Identity.Domain.csproj" />
+  <Project Path="src/Modules/Identity/MealPrep.Identity.Application/MealPrep.Identity.Application.csproj" />
+  <Project Path="src/Modules/Identity/MealPrep.Identity.Infrastructure/MealPrep.Identity.Infrastructure.csproj" />
+  <Project Path="src/Modules/Households/MealPrep.Households.Domain/MealPrep.Households.Domain.csproj" />
+  <Project Path="src/Modules/Households/MealPrep.Households.Application/MealPrep.Households.Application.csproj" />
+  <Project Path="src/Modules/Households/MealPrep.Households.Infrastructure/MealPrep.Households.Infrastructure.csproj" />
+  <Project Path="src/Modules/Recipes/MealPrep.Recipes.Domain/MealPrep.Recipes.Domain.csproj" />
+  <Project Path="src/Modules/Recipes/MealPrep.Recipes.Application/MealPrep.Recipes.Application.csproj" />
+  <Project Path="src/Modules/Recipes/MealPrep.Recipes.Infrastructure/MealPrep.Recipes.Infrastructure.csproj" />
+  <Project Path="src/Modules/MealPlanning/MealPrep.MealPlanning.Domain/MealPrep.MealPlanning.Domain.csproj" />
+  <Project Path="src/Modules/MealPlanning/MealPrep.MealPlanning.Application/MealPrep.MealPlanning.Application.csproj" />
+  <Project Path="src/Modules/MealPlanning/MealPrep.MealPlanning.Infrastructure/MealPrep.MealPlanning.Infrastructure.csproj" />
+  <Project Path="src/Modules/Groceries/MealPrep.Groceries.Domain/MealPrep.Groceries.Domain.csproj" />
+  <Project Path="src/Modules/Groceries/MealPrep.Groceries.Application/MealPrep.Groceries.Application.csproj" />
+  <Project Path="src/Modules/Groceries/MealPrep.Groceries.Infrastructure/MealPrep.Groceries.Infrastructure.csproj" />
+  <Project Path="tests/MealPrep.ArchitectureChecks/MealPrep.ArchitectureChecks.csproj" />
 </Solution>

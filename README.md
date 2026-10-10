@@ -6,6 +6,8 @@ A connected household meal-planning application that generates weekly preparatio
 
 Phase 1 is in planning. The repository currently contains documentation; the application has not been scaffolded or deployed.
 
+The [CI workflow](.github/workflows/ci.yml) checks documentation on pushes and pull requests. See [CI/CD](docs/ci-cd.md) for local checks, limitations and the planned application/deployment stages.
+
 ## Documentation
 
 Start with the [documentation index](docs/README.md).

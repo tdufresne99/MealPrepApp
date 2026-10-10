@@ -1,0 +1,8 @@
+{
+  "config": {
+    // Long prose and comparison tables are intentional in design documents.
+    "MD013": false,
+    // Table cells use line breaks to keep entity and table lists readable.
+    "MD033": { "allowed_elements": ["br"] }
+  }
+}

@@ -10,6 +10,8 @@
 
 ## Documentation conventions
 
+See [Continuous integration and delivery](ci-cd.md) for the current checks and future deployment gates.
+
 Markdown files in this repository are the maintained documentation baseline. Keep documentation and code in English; French is used only for application translations or relevant user-content examples.
 
 The specifications define product behavior. The architecture explains proposed mechanisms and distinguishes accepted requirements from proposed technology choices. The prototype plan narrows the first demonstrable scope without deleting long-term product requirements. Resolve contradictory decisions explicitly rather than assuming all proposals are accepted.

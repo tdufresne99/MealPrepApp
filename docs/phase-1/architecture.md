@@ -115,22 +115,22 @@ The client uses a public application API; the backend modules communicate in-pro
 ### 4.4 Industry references
 
 Ionic Angular: Angular integration and Capacitor mobile packaging.
-https://ionicframework.com/angular
+<https://ionicframework.com/angular>
 
 Capacitor environment setup: iOS toolchain and local development prerequisites.
-https://capacitorjs.com/docs/getting-started/environment-setup
+<https://capacitorjs.com/docs/getting-started/environment-setup>
 
 Npgsql EF Core provider: PostgreSQL persistence adapter candidate.
-https://www.npgsql.org/efcore/
+<https://www.npgsql.org/efcore/>
 
 EF Core concurrency: Optimistic concurrency tokens and conflict handling.
-https://learn.microsoft.com/en-us/ef/core/saving/concurrency
+<https://learn.microsoft.com/en-us/ef/core/saving/concurrency>
 
 ASP.NET Core Identity: Account-management candidate; session design requires a separate decision.
-https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-10.0
+<https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-10.0>
 
 Angular internationalization: Localization concepts; mobile runtime language switching requires validation.
-https://angular.dev/guide/i18n
+<https://angular.dev/guide/i18n>
 
 References checked on 10 October 2026. They support technology capabilities, not a claim that this application has been implemented or validated.
 
@@ -155,7 +155,7 @@ flowchart TD
     APP --> DOM
 ```
 
-*Figure 1 Compile-time dependency direction*
+Figure 1 Compile-time dependency direction
 
 Domain has no references to HTTP, EF Core, Angular or identity-framework types. Infrastructure references Application and Domain. Api references Application and Infrastructure to wire implementations. The diagram shows code dependencies, not runtime request routing.
 
@@ -244,7 +244,7 @@ flowchart TD
     G -->|IMealPlanIngredientsQuery| P
 ```
 
-*Figure 4 Context map and cross-module contracts*
+Figure 4 Context map and cross-module contracts
 
 #### 5.4.2 Database access policy
 
@@ -271,7 +271,7 @@ flowchart LR
     T["Technical idempotency adapter"] --> TS[("platform.command_receipts")]
 ```
 
-*Figure 5 Module entities and owned PostgreSQL schemas*
+Figure 5 Module entities and owned PostgreSQL schemas
 
 #### 5.4.3 Inbound ports outbound ports and communication
 
@@ -306,7 +306,7 @@ flowchart TD
     APP --> RP --> RA --> Provider
 ```
 
-*Figure 6 Hexagonal structure within a business context*
+Figure 6 Hexagonal structure within a business context
 
 #### 5.4.4 Entity relationships and aggregate invariants
 
@@ -339,7 +339,7 @@ erDiagram
     }
 ```
 
-*Figure 7 Recipe and planning aggregate relationships*
+Figure 7 Recipe and planning aggregate relationships
 
 #### 5.4.5 Transactions versions and consistency
 
@@ -392,7 +392,7 @@ sequenceDiagram
     Note over Client,DB: Saving is a separate authorized operation with version checks and an atomic commit
 ```
 
-*Figure 2 Meal-plan generation sequence*
+Figure 2 Meal-plan generation sequence
 
 Generate and save a plan: authorize the household and load a coherent recipe input snapshot. Solve outside the write transaction and return a proposal for review. When saving, authorize again and verify input versions or a server-verifiable proposal context. Revalidate all plan invariants and commit the full aggregate atomically. Client-supplied prices, quantities, permissions or constraint outcomes are not trusted simply because they were returned earlier.
 
@@ -426,7 +426,7 @@ flowchart TD
     API -.->|Deployment relocation| Next
 ```
 
-*Figure 3 Deployment components*
+Figure 3 Deployment components
 
 Start with one API instance, a central PostgreSQL service and object storage. Keep database access private and secrets outside source control. API process-local state must not be the authority for sessions, idempotency or saved plans if instances are added later. Actual availability, backup objectives and hosting costs remain to be evaluated.
 

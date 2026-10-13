@@ -12,6 +12,8 @@ There is no custom documentation checker or documentation test suite to maintain
 
 ## Run the same checks locally
 
+The `Portable infrastructure` job builds the API container and runs `scripts/Test-Us03Compose.ps1` on a Linux Docker host. It validates three isolated environments, schema initialization, data persistence after container recreation, database outage detection and recovery. It uses generated local test secrets and disposes only its own temporary projects and volumes. Run the same script locally with Docker Desktop running; see [local infrastructure](local-infrastructure.md).
+
 Use a Node.js version supported by the linter, then run the same linter version bundled with the pinned action:
 
 ```text

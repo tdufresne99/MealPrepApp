@@ -12,6 +12,8 @@
 
 ## Documentation conventions
 
+See [portable local infrastructure](local-infrastructure.md) for Docker startup, environments, persistence and US-03 acceptance checks.
+
 The [implemented backend module boundaries](module-boundaries.md) describe the current assembly structure, dependency checks and their limits.
 
 See [Continuous integration and delivery](ci-cd.md) for the current checks and future deployment gates.

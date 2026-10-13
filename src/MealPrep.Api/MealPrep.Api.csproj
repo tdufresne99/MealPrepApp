@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="../Platform/MealPrep.Platform.Infrastructure/MealPrep.Platform.Infrastructure.csproj" />
     <ProjectReference Include="../Modules/Identity/MealPrep.Identity.Infrastructure/MealPrep.Identity.Infrastructure.csproj" />
     <ProjectReference Include="../Modules/Households/MealPrep.Households.Infrastructure/MealPrep.Households.Infrastructure.csproj" />
     <ProjectReference Include="../Modules/Recipes/MealPrep.Recipes.Infrastructure/MealPrep.Recipes.Infrastructure.csproj" />

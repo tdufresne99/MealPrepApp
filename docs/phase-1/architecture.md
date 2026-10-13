@@ -366,7 +366,8 @@ src/
     Recipes/       # Same layers; provider Contracts when needed
     MealPlanning/  # Same layers; provider Contracts when needed
     Groceries/     # Domain, Application and Infrastructure
-  Platform/        # Future: narrow technical adapters when needed
+  Platform/        # Narrow shared technical adapters
+    MealPrep.Platform.Infrastructure/ # US-03: PostgreSQL readiness and explicit schema bootstrap
 ```
 
 Allowed references: Application to its own Domain; Infrastructure to its own Application/Domain and the published Contracts of providers it consumes; provider Application to its own Contracts; Api to application entry points and infrastructure registration. Contracts contain immutable DTOs and capability interfaces without EF Core or domain-entity dependencies. Domain has no outbound project references to other contexts.
@@ -435,6 +436,8 @@ Use Development, Staging and Production with separate configuration, credentials
 ### 7.2 Startup and demonstration data
 
 Define repeatable local startup for the API and PostgreSQL, with explicit migration and seed steps. Seed a non-production household, users with the three household roles, bilingual application reference data and recipes that exercise vegetarian, lunch-friendly and cold-serving constraints. Do not seed public production accounts or credentials.
+
+US-03 implements [local container startup](../local-infrastructure.md) with isolated environment volumes, external secret files, database readiness and an explicit `--migrate` schema bootstrap. The platform adapter owns connection pooling and technical initialization; each module registers its own schema. No business tables, EF Core mappings or demonstration users are created at this stage. Versioned module migrations and seeds are introduced alongside their entities.
 
 An early iPhone prototype validates login, household recipe retrieval, image upload, language switching and connection-failure behavior. Limited access to a Mac makes the iOS build and signing workflow an early risk. The exact native package versions, supported iOS releases and automated build provider remain to be selected.
 

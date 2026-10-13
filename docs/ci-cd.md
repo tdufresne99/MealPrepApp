@@ -2,13 +2,13 @@
 
 ## Current implementation
 
-The repository contains documentation and the minimal API host introduced by US-01. The `CI` workflow runs on pushes to all branches, pull requests targeting `main`, and manual dispatch. It uses a GitHub-hosted Ubuntu runner; the owner's computer is not a CI runner.
+The repository contains documentation, the API host introduced by US-01 and the module boundaries introduced by US-02. The `CI` workflow runs on pushes to all branches, pull requests targeting `main`, and manual dispatch. It uses a GitHub-hosted Ubuntu runner; the owner's computer is not a CI runner.
 
-The `Backend build` job installs the SDK pinned by `global.json`, restores `MealPrepApp.slnx` and builds it in Release configuration. No application test suite exists yet; this job validates compilation only. See the [backend startup instructions](../README.md#run-the-backend) to check the health endpoint locally.
+The `Backend build` job installs the SDK pinned by `global.json`, restores `MealPrepApp.slnx`, builds it in Release configuration and runs the executable architecture checker. The checker validates evaluated project dependencies and compiled assembly references, with a failing exit status on forbidden references. See [module boundaries](module-boundaries.md) for the rules and limits. No business-behavior test suite exists yet. See the [backend startup instructions](../README.md#run-the-backend) to check the health endpoint locally.
 
 The `Documentation` job uses the standard `markdownlint-cli2` action to check Markdown formatting in the root README, under `docs/`, and in `.github` Markdown templates. Rules cover headings, lists, code fences, spacing and other Markdown conventions. The small repository configuration allows long prose and HTML line breaks in tables. Link-target existence and Mermaid rendering are not checked by this workflow.
 
-There is no custom documentation checker or test suite to maintain. Workflow action dependencies are pinned to full commit hashes. Dependabot proposes weekly action updates; those updates still require review. Token permissions are read-only and checkout does not persist credentials. Superseded runs on the same branch or pull request are cancelled.
+There is no custom documentation checker or documentation test suite to maintain. Workflow action dependencies are pinned to full commit hashes. Dependabot proposes weekly action updates; those updates still require review. Token permissions are read-only and checkout does not persist credentials. Superseded runs on the same branch or pull request are cancelled.
 
 ## Run the same checks locally
 
@@ -19,6 +19,14 @@ npx --yes markdownlint-cli2@0.23.1 "README.md" "docs/**/*.md" ".github/*.md"
 ```
 
 These commands run from the repository root. A nonzero exit status means the check failed. GitHub execution is verified only after the workflow has been committed, pushed and run in the repository Actions tab.
+
+For the backend and module boundaries:
+
+```sh
+dotnet restore MealPrepApp.slnx
+dotnet build MealPrepApp.slnx --configuration Release --no-restore
+dotnet run --project tests/MealPrep.ArchitectureChecks --configuration Release --no-build
+```
 
 ## Main branch protection
 

@@ -4,9 +4,9 @@ A connected household meal-planning application that generates weekly preparatio
 
 ## Project status
 
-US-01 introduces the minimal ASP.NET Core API host and its health endpoint. Business modules, authentication, persistence and the mobile client remain to be implemented.
+US-01 introduces the minimal ASP.NET Core API host and its health endpoint. US-02 adds separate Domain, Application and Infrastructure projects for Identity, Households, Recipes, MealPlanning and Groceries, with architecture checks. Business behavior, authentication, persistence and the mobile client remain to be implemented.
 
-The [CI workflow](.github/workflows/ci.yml) checks documentation and builds the backend on pushes and pull requests. See [CI/CD](docs/ci-cd.md) for local checks and planned deployment stages.
+The [CI workflow](.github/workflows/ci.yml) checks documentation, builds the backend and verifies module dependencies on pushes and pull requests. See [CI/CD](docs/ci-cd.md) for local checks and planned deployment stages.
 
 ## Run the backend
 
@@ -21,6 +21,16 @@ dotnet run --project src/MealPrep.Api --configuration Release --no-build -- --ur
 Open <http://127.0.0.1:5080/health>. Expect HTTP `200` and the plain-text body `Healthy`, without authentication or a database. Stop the host with Ctrl+C.
 
 This endpoint checks that the host can respond; it does not yet check database readiness. The example address is local development configuration. Hosting addresses can be set with `--urls` or `ASPNETCORE_URLS`; no hosting provider or credentials are embedded in the application.
+
+## Verify module boundaries
+
+After building the solution in Release mode, run from the repository root:
+
+```sh
+dotnet run --project tests/MealPrep.ArchitectureChecks --configuration Release --no-build
+```
+
+The checker exits with a nonzero status on forbidden dependencies. It evaluates MSBuild references in Debug and Release (including imported properties and conditional references), checks source project discovery and inspects Release assembly references. See [module boundaries](docs/module-boundaries.md) for the dependency rules and enforcement limits. This is an executable architecture check, not a unit-test framework; `dotnet test` does not run it.
 
 ## Documentation
 
@@ -40,4 +50,4 @@ Start with the [documentation index](docs/README.md).
 - Portable backend hosting, initially on the owner's computer.
 - Separate Development, Staging and Production data/configuration.
 
-The proposed stack is Angular/Ionic/Capacitor, ASP.NET Core .NET 10 and PostgreSQL, organized as a modular hexagonal monolith. Client dependency compatibility and an actual iPhone prototype remain to be validated. The API host is the composition root; module boundaries will be introduced in subsequent stories.
+The proposed stack is Angular/Ionic/Capacitor, ASP.NET Core .NET 10 and PostgreSQL, organized as a modular hexagonal monolith. Client dependency compatibility and an actual iPhone prototype remain to be validated. The API host is the composition root and calls each module's infrastructure registration entry point.

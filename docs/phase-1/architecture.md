@@ -351,7 +351,7 @@ Aggregate version checks include child changes. Consumer projections expose stab
 
 #### 5.4.6 Assembly boundaries and enforcement
 
-Refine the earlier four-layer layout into module-specific assemblies to make forbidden references detectable at compile time and in architecture tests. Each business module has Domain, Application and Infrastructure projects. Add a small Contracts project only for providers that expose cross-context capabilities. MealPrep.Api is the composition root and hosts HTTP adapters. This refinement is proposed and has not been scaffolded.
+Refine the earlier four-layer layout into module-specific assemblies to make forbidden references detectable at compile time and in architecture tests. US-02 scaffolds Domain, Application and Infrastructure projects for each business module and adds executable dependency checks in CI. Add a small Contracts project only for providers that expose cross-context capabilities; none are required by the current scaffolding. MealPrep.Api is the composition root and hosts HTTP adapters. See [implemented module boundaries](../module-boundaries.md) for the enforced policy and its limits.
 
 ```text
 src/
@@ -361,12 +361,12 @@ src/
       MealPrep.Identity.Domain/
       MealPrep.Identity.Application/
       MealPrep.Identity.Infrastructure/
-      MealPrep.Identity.Contracts/
-    Households/    # Same layer structure and provider Contracts
-    Recipes/       # Same layer structure and provider Contracts
-    MealPlanning/  # Same layer structure and provider Contracts
+      MealPrep.Identity.Contracts/  # Future: add when a published capability is needed
+    Households/    # Same layers; provider Contracts when needed
+    Recipes/       # Same layers; provider Contracts when needed
+    MealPlanning/  # Same layers; provider Contracts when needed
     Groceries/     # Domain, Application and Infrastructure
-  Platform/        # Narrow technical adapters and composition helpers
+  Platform/        # Future: narrow technical adapters when needed
 ```
 
 Allowed references: Application to its own Domain; Infrastructure to its own Application/Domain and the published Contracts of providers it consumes; provider Application to its own Contracts; Api to application entry points and infrastructure registration. Contracts contain immutable DTOs and capability interfaces without EF Core or domain-entity dependencies. Domain has no outbound project references to other contexts.
@@ -717,7 +717,7 @@ Production requires protected database connectivity, object storage configuratio
 | Criterion | Current assessment | Evidence required |
 | --- | --- | --- |
 | Scope alignment | Documented proposal | Resolve relevant open specification decisions. |
-| Module boundaries | Proposed | Project references and architecture tests. |
+| Module boundaries | Scaffolded in US-02 | Project references and executable architecture checks; database ownership integration tests remain future work. |
 | Planning correctness | Not implemented | Domain cases, solver checks and benchmark results. |
 | Shared-data isolation | Not implemented | Authorization and cross-household integration tests. |
 | Persistence and concurrency | Not implemented | PostgreSQL mappings and concurrent-write tests. |

@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="../../../Platform/MealPrep.Platform.Infrastructure/MealPrep.Platform.Infrastructure.csproj" />
     <ProjectReference Include="../MealPrep.MealPlanning.Application/MealPrep.MealPlanning.Application.csproj" />
     <ProjectReference Include="../MealPrep.MealPlanning.Domain/MealPrep.MealPlanning.Domain.csproj" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0" />

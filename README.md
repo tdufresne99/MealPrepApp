@@ -4,11 +4,13 @@ A connected household meal-planning application that generates weekly preparatio
 
 ## Project status
 
-US-01 introduces the minimal ASP.NET Core API host and its health endpoint. US-02 adds separate Domain, Application and Infrastructure projects for Identity, Households, Recipes, MealPlanning and Groceries, with architecture checks. Business behavior, authentication, persistence and the mobile client remain to be implemented.
+US-01 introduces the minimal ASP.NET Core API host and its health endpoint. US-02 adds separate Domain, Application and Infrastructure projects for Identity, Households, Recipes, MealPlanning and Groceries, with architecture checks. US-03 adds portable API/PostgreSQL containers, separate local environments, schema initialization and database readiness. Business behavior, authentication, business-table persistence and the mobile client remain to be implemented.
 
 The [CI workflow](.github/workflows/ci.yml) checks documentation, builds the backend and verifies module dependencies on pushes and pull requests. See [CI/CD](docs/ci-cd.md) for local checks and planned deployment stages.
 
 ## Run the backend
+
+For API + PostgreSQL containers with durable storage, start with [portable local infrastructure](docs/local-infrastructure.md). The commands below run the API process alone; `/health/ready` needs database configuration and returns 503 when none is supplied.
 
 Install the .NET SDK **10.0.400**, pinned in `global.json`. From the repository root:
 

@@ -9,7 +9,7 @@ src/Modules/Recipes/
   MealPrep.Recipes.Infrastructure/
 ```
 
-Domain and Application currently contain no business types. Infrastructure exposes a module registration extension, invoked by the API composition root. Registration currently returns the service collection without adding services. No repositories, use cases, entities or persistence adapters are invented to populate the layers.
+Domain and Application currently contain no business types. Infrastructure exposes a module registration extension, invoked by the API composition root. Since US-03, registration declares the module's owned PostgreSQL schema for explicit initialization. No repositories, use cases or entities are invented to populate the layers.
 
 ## Reference policy
 
@@ -20,6 +20,9 @@ Domain and Application currently contain no business types. Infrastructure expos
 | Infrastructure | Its own Application, Domain and Contracts; another module's published Contracts |
 | Contracts | None |
 | API | Module Application entry points and Infrastructure registration |
+| Platform.Infrastructure | No application project references; shared PostgreSQL connection, readiness and schema bootstrap adapters |
+
+US-03 allows API and module Infrastructure to reference the narrow `MealPrep.Platform.Infrastructure` technical adapter. Domain, Application and Contracts cannot reference it. Each module now registers its owned schema descriptor; shared connection pooling does not grant permission to access another module's tables. Business tables and DbContexts remain unimplemented.
 
 Contracts projects are added when a provider exposes a capability required by another module. None are needed by US-02. A consumer defines its outbound port in its own Application; its Infrastructure adapter uses the provider's published interface and immutable projections. Contracts never expose domain entities, DbContexts or framework types. The provider implements the capability using its own layers.
 
@@ -36,7 +39,7 @@ flowchart LR
 
 Arrows show code dependencies. Runtime calls follow use cases and ports; project references do not authorize direct database access.
 
-Inner layers currently allow no NuGet packages, explicit DLL references or framework references beyond the implicit .NET runtime. Any necessary package exception must be introduced deliberately with its policy change. Infrastructure references only dependency-injection abstractions for registration; it does not reference the ASP.NET shared framework. No module references another module's implementation.
+Inner layers currently allow no NuGet packages, explicit DLL references or framework references beyond the implicit .NET runtime. Any necessary package exception must be introduced deliberately with its policy change. Module Infrastructure references dependency-injection abstractions and the PostgreSQL platform adapter; it does not reference the ASP.NET shared framework. No module references another module's implementation.
 
 ## Automated checks
 

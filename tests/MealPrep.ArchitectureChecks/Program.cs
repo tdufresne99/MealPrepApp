@@ -19,6 +19,10 @@ try
         {
             boundary = new(name, null, "Api", file);
         }
+        else if (name == "MealPrep.Platform.Infrastructure")
+        {
+            boundary = new(name, "Platform", "Platform", file);
+        }
         else
         {
             var parts = name.Split('.');
@@ -33,7 +37,9 @@ try
 
         var expected = boundary.Layer == "Api"
             ? Path.Combine(root, "src", name, name + ".csproj")
-            : Path.Combine(root, "src", "Modules", boundary.Module!, name, name + ".csproj");
+            : boundary.Layer == "Platform"
+                ? Path.Combine(root, "src", "Platform", name, name + ".csproj")
+                : Path.Combine(root, "src", "Modules", boundary.Module!, name, name + ".csproj");
         if (!Path.GetFullPath(file).Equals(expected, StringComparison.OrdinalIgnoreCase))
             errors.Add($"{name}: project must be located at {expected}.");
         projects.Add(Path.GetFullPath(file), boundary);
@@ -113,8 +119,9 @@ bool CanReference(ProjectBoundary source, ProjectBoundary target) => source.Laye
     "Domain" or "Contracts" => false,
     "Application" => source.Module == target.Module && target.Layer is "Domain" or "Contracts",
     "Infrastructure" => (source.Module == target.Module && target.Layer is "Domain" or "Application" or "Contracts")
-        || (source.Module != target.Module && target.Layer == "Contracts"),
-    "Api" => target.Layer is "Application" or "Infrastructure",
+        || (source.Module != target.Module && target.Layer == "Contracts") || target.Layer == "Platform",
+    "Api" => target.Layer is "Application" or "Infrastructure" or "Platform",
+    "Platform" => false,
     _ => false
 };
 

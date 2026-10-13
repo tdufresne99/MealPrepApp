@@ -1,0 +1,5 @@
+# Optional loopback-only database access for Visual Studio development.
+services:
+  db:
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:?Set local database port}:5432"
